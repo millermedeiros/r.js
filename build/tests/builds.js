@@ -111,6 +111,19 @@ define(['build', 'env!env/file'], function (build, file) {
     );
     doh.run();
 
+    doh.register("buildOneJsFileAnomNumber",
+        [
+            function buildOneJsFileAnomNumber(t) {
+                build(["name=MIN_INT", "excludeShallow=dos", "out=builds/anomNumber.js",
+                       "baseUrl=../../../requirejs/tests/anon", "optimize=none"]);
+
+                t.is(nol(c("expected/anonNumber.js")), nol(c("builds/anomNumber.js")));
+                require._buildReset();
+            }
+        ]
+    );
+    doh.run();
+
     doh.register("buildSimple",
         [
             function buildSimple(t) {
